@@ -1,0 +1,5 @@
+peft
+deepspeed
+trl
+bitsandbytes
+transformers==4.37.2
