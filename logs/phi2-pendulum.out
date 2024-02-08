@@ -1,0 +1,295 @@
+Thu Feb  8 12:20:18 2024       
++---------------------------------------------------------------------------------------+
+| NVIDIA-SMI 545.23.08              Driver Version: 545.23.08    CUDA Version: 12.3     |
+|-----------------------------------------+----------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |         Memory-Usage | GPU-Util  Compute M. |
+|                                         |                      |               MIG M. |
+|=========================================+======================+======================|
+|   0  NVIDIA L40                     On  | 00000000:C1:00.0 Off |                    0 |
+| N/A   25C    P8              35W / 300W |      4MiB / 46068MiB |      0%      Default |
+|                                         |                      |                  N/A |
++-----------------------------------------+----------------------+----------------------+
+                                                                                         
++---------------------------------------------------------------------------------------+
+| Processes:                                                                            |
+|  GPU   GI   CI        PID   Type   Process name                            GPU Memory |
+|        ID   ID                                                             Usage      |
+|=======================================================================================|
+|  No running processes found                                                           |
++---------------------------------------------------------------------------------------+
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Mon_Apr__3_17:16:06_PDT_2023
+Cuda compilation tools, release 12.1, V12.1.105
+Build cuda_12.1.r12.1/compiler.32688072_0
+/usr/local/cuda-12.1/bin/nvcc
+pip 20.2.4 from /usr/lib/python3.9/site-packages/pip (python 3.9)
+Python 3.9.7
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: datasets in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 1)) (2.16.1)
+Requirement already satisfied: peft in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 2)) (0.8.2)
+Requirement already satisfied: trl in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 3)) (0.7.10)
+Requirement already satisfied: bitsandbytes in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 4)) (0.42.0)
+Requirement already satisfied: transformers==4.37.2 in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 5)) (4.37.2)
+Requirement already satisfied: deepspeed in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 6)) (0.13.1)
+Requirement already satisfied: tensorboard in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 7)) (2.15.1)
+Requirement already satisfied: wandb in /home/quantinx/.local/lib/python3.9/site-packages (from -r requirements.txt (line 8)) (0.16.3)
+Requirement already satisfied: numpy>=1.17 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (1.26.4)
+Requirement already satisfied: pandas in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (2.2.0)
+Requirement already satisfied: aiohttp in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (3.9.3)
+Requirement already satisfied: filelock in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (3.13.1)
+Requirement already satisfied: dill<0.3.8,>=0.3.0 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (0.3.7)
+Requirement already satisfied: tqdm>=4.62.1 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (4.66.1)
+Requirement already satisfied: pyyaml>=5.1 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (6.0.1)
+Requirement already satisfied: pyarrow>=8.0.0 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (15.0.0)
+Requirement already satisfied: requests>=2.19.0 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (2.31.0)
+Requirement already satisfied: multiprocess in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (0.70.16)
+Requirement already satisfied: huggingface-hub>=0.19.4 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (0.20.3)
+Requirement already satisfied: xxhash in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (3.4.1)
+Requirement already satisfied: pyarrow-hotfix in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (0.6)
+Requirement already satisfied: fsspec[http]<=2023.10.0,>=2023.1.0 in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (2023.10.0)
+Requirement already satisfied: packaging in /home/quantinx/.local/lib/python3.9/site-packages (from datasets->-r requirements.txt (line 1)) (23.2)
+Requirement already satisfied: torch>=1.13.0 in /home/quantinx/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 2)) (2.2.0)
+Requirement already satisfied: psutil in /home/quantinx/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 2)) (5.9.8)
+Requirement already satisfied: safetensors in /home/quantinx/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 2)) (0.4.2)
+Requirement already satisfied: accelerate>=0.21.0 in /home/quantinx/.local/lib/python3.9/site-packages (from peft->-r requirements.txt (line 2)) (0.26.1)
+Requirement already satisfied: tyro>=0.5.11 in /home/quantinx/.local/lib/python3.9/site-packages (from trl->-r requirements.txt (line 3)) (0.7.2)
+Requirement already satisfied: scipy in /home/quantinx/.local/lib/python3.9/site-packages (from bitsandbytes->-r requirements.txt (line 4)) (1.12.0)
+Requirement already satisfied: tokenizers<0.19,>=0.14 in /home/quantinx/.local/lib/python3.9/site-packages (from transformers==4.37.2->-r requirements.txt (line 5)) (0.15.1)
+Requirement already satisfied: regex!=2019.12.17 in /home/quantinx/.local/lib/python3.9/site-packages (from transformers==4.37.2->-r requirements.txt (line 5)) (2023.12.25)
+Requirement already satisfied: hjson in /home/quantinx/.local/lib/python3.9/site-packages (from deepspeed->-r requirements.txt (line 6)) (3.1.0)
+Requirement already satisfied: ninja in /home/quantinx/.local/lib/python3.9/site-packages (from deepspeed->-r requirements.txt (line 6)) (1.11.1.1)
+Requirement already satisfied: py-cpuinfo in /home/quantinx/.local/lib/python3.9/site-packages (from deepspeed->-r requirements.txt (line 6)) (9.0.0)
+Requirement already satisfied: pydantic in /home/quantinx/.local/lib/python3.9/site-packages (from deepspeed->-r requirements.txt (line 6)) (2.6.1)
+Requirement already satisfied: pynvml in /home/quantinx/.local/lib/python3.9/site-packages (from deepspeed->-r requirements.txt (line 6)) (11.5.0)
+Requirement already satisfied: markdown>=2.6.8 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (3.5.2)
+Requirement already satisfied: six>1.9 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (1.16.0)
+Requirement already satisfied: absl-py>=0.4 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (2.1.0)
+Requirement already satisfied: google-auth-oauthlib<2,>=0.5 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (1.2.0)
+Requirement already satisfied: protobuf<4.24,>=3.19.6 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (4.23.4)
+Requirement already satisfied: grpcio>=1.48.2 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (1.60.1)
+Requirement already satisfied: setuptools>=41.0.0 in /usr/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (50.3.2)
+Requirement already satisfied: werkzeug>=1.0.1 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (3.0.1)
+Requirement already satisfied: google-auth<3,>=1.6.3 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (2.27.0)
+Requirement already satisfied: tensorboard-data-server<0.8.0,>=0.7.0 in /home/quantinx/.local/lib/python3.9/site-packages (from tensorboard->-r requirements.txt (line 7)) (0.7.2)
+Requirement already satisfied: Click!=8.0.0,>=7.1 in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (8.1.7)
+Requirement already satisfied: docker-pycreds>=0.4.0 in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (0.4.0)
+Requirement already satisfied: typing-extensions; python_version < "3.10" in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (4.9.0)
+Requirement already satisfied: appdirs>=1.4.3 in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (1.4.4)
+Requirement already satisfied: GitPython!=3.1.29,>=1.0.0 in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (3.1.41)
+Requirement already satisfied: sentry-sdk>=1.0.0 in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (1.40.2)
+Requirement already satisfied: setproctitle in /home/quantinx/.local/lib/python3.9/site-packages (from wandb->-r requirements.txt (line 8)) (1.3.3)
+Requirement already satisfied: pytz>=2020.1 in /home/quantinx/.local/lib/python3.9/site-packages (from pandas->datasets->-r requirements.txt (line 1)) (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /home/quantinx/.local/lib/python3.9/site-packages (from pandas->datasets->-r requirements.txt (line 1)) (2023.4)
+Requirement already satisfied: python-dateutil>=2.8.2 in /home/quantinx/.local/lib/python3.9/site-packages (from pandas->datasets->-r requirements.txt (line 1)) (2.8.2)
+Requirement already satisfied: yarl<2.0,>=1.0 in /home/quantinx/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 1)) (1.9.4)
+Requirement already satisfied: attrs>=17.3.0 in /home/quantinx/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 1)) (23.2.0)
+Requirement already satisfied: frozenlist>=1.1.1 in /home/quantinx/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 1)) (1.4.1)
+Requirement already satisfied: multidict<7.0,>=4.5 in /home/quantinx/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 1)) (6.0.5)
+Requirement already satisfied: aiosignal>=1.1.2 in /home/quantinx/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 1)) (1.3.1)
+Requirement already satisfied: async-timeout<5.0,>=4.0; python_version < "3.11" in /home/quantinx/.local/lib/python3.9/site-packages (from aiohttp->datasets->-r requirements.txt (line 1)) (4.0.3)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /home/quantinx/.local/lib/python3.9/site-packages (from requests>=2.19.0->datasets->-r requirements.txt (line 1)) (2.2.0)
+Requirement already satisfied: idna<4,>=2.5 in /home/quantinx/.local/lib/python3.9/site-packages (from requests>=2.19.0->datasets->-r requirements.txt (line 1)) (3.6)
+Requirement already satisfied: certifi>=2017.4.17 in /home/quantinx/.local/lib/python3.9/site-packages (from requests>=2.19.0->datasets->-r requirements.txt (line 1)) (2024.2.2)
+Requirement already satisfied: charset-normalizer<4,>=2 in /home/quantinx/.local/lib/python3.9/site-packages (from requests>=2.19.0->datasets->-r requirements.txt (line 1)) (3.3.2)
+Requirement already satisfied: sympy in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (1.12)
+Requirement already satisfied: nvidia-nvtx-cu12==12.1.105; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: jinja2 in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (3.1.3)
+Requirement already satisfied: nvidia-cublas-cu12==12.1.3.1; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.1.3.1)
+Requirement already satisfied: triton==2.2.0; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (2.2.0)
+Requirement already satisfied: nvidia-cuda-runtime-cu12==12.1.105; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cuda-cupti-cu12==12.1.105; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: nvidia-cufft-cu12==11.0.2.54; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (11.0.2.54)
+Requirement already satisfied: nvidia-curand-cu12==10.3.2.106; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (10.3.2.106)
+Requirement already satisfied: nvidia-cusolver-cu12==11.4.5.107; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (11.4.5.107)
+Requirement already satisfied: nvidia-cusparse-cu12==12.1.0.106; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.1.0.106)
+Requirement already satisfied: nvidia-nccl-cu12==2.19.3; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (2.19.3)
+Requirement already satisfied: nvidia-cudnn-cu12==8.9.2.26; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (8.9.2.26)
+Requirement already satisfied: networkx in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (3.2.1)
+Requirement already satisfied: nvidia-cuda-nvrtc-cu12==12.1.105; platform_system == "Linux" and platform_machine == "x86_64" in /home/quantinx/.local/lib/python3.9/site-packages (from torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.1.105)
+Requirement already satisfied: docstring-parser>=0.14.1 in /home/quantinx/.local/lib/python3.9/site-packages (from tyro>=0.5.11->trl->-r requirements.txt (line 3)) (0.15)
+Requirement already satisfied: shtab>=1.5.6 in /home/quantinx/.local/lib/python3.9/site-packages (from tyro>=0.5.11->trl->-r requirements.txt (line 3)) (1.6.5)
+Requirement already satisfied: rich>=11.1.0 in /home/quantinx/.local/lib/python3.9/site-packages (from tyro>=0.5.11->trl->-r requirements.txt (line 3)) (13.7.0)
+Requirement already satisfied: pydantic-core==2.16.2 in /home/quantinx/.local/lib/python3.9/site-packages (from pydantic->deepspeed->-r requirements.txt (line 6)) (2.16.2)
+Requirement already satisfied: annotated-types>=0.4.0 in /home/quantinx/.local/lib/python3.9/site-packages (from pydantic->deepspeed->-r requirements.txt (line 6)) (0.6.0)
+Requirement already satisfied: importlib-metadata>=4.4; python_version < "3.10" in /home/quantinx/.local/lib/python3.9/site-packages (from markdown>=2.6.8->tensorboard->-r requirements.txt (line 7)) (7.0.1)
+Requirement already satisfied: requests-oauthlib>=0.7.0 in /home/quantinx/.local/lib/python3.9/site-packages (from google-auth-oauthlib<2,>=0.5->tensorboard->-r requirements.txt (line 7)) (1.3.1)
+Requirement already satisfied: MarkupSafe>=2.1.1 in /home/quantinx/.local/lib/python3.9/site-packages (from werkzeug>=1.0.1->tensorboard->-r requirements.txt (line 7)) (2.1.5)
+Requirement already satisfied: rsa<5,>=3.1.4 in /home/quantinx/.local/lib/python3.9/site-packages (from google-auth<3,>=1.6.3->tensorboard->-r requirements.txt (line 7)) (4.9)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in /home/quantinx/.local/lib/python3.9/site-packages (from google-auth<3,>=1.6.3->tensorboard->-r requirements.txt (line 7)) (0.3.0)
+Requirement already satisfied: cachetools<6.0,>=2.0.0 in /home/quantinx/.local/lib/python3.9/site-packages (from google-auth<3,>=1.6.3->tensorboard->-r requirements.txt (line 7)) (5.3.2)
+Requirement already satisfied: gitdb<5,>=4.0.1 in /home/quantinx/.local/lib/python3.9/site-packages (from GitPython!=3.1.29,>=1.0.0->wandb->-r requirements.txt (line 8)) (4.0.11)
+Requirement already satisfied: mpmath>=0.19 in /home/quantinx/.local/lib/python3.9/site-packages (from sympy->torch>=1.13.0->peft->-r requirements.txt (line 2)) (1.3.0)
+Requirement already satisfied: nvidia-nvjitlink-cu12 in /home/quantinx/.local/lib/python3.9/site-packages (from nvidia-cusolver-cu12==11.4.5.107; platform_system == "Linux" and platform_machine == "x86_64"->torch>=1.13.0->peft->-r requirements.txt (line 2)) (12.3.101)
+Requirement already satisfied: markdown-it-py>=2.2.0 in /home/quantinx/.local/lib/python3.9/site-packages (from rich>=11.1.0->tyro>=0.5.11->trl->-r requirements.txt (line 3)) (3.0.0)
+Requirement already satisfied: pygments<3.0.0,>=2.13.0 in /home/quantinx/.local/lib/python3.9/site-packages (from rich>=11.1.0->tyro>=0.5.11->trl->-r requirements.txt (line 3)) (2.17.2)
+Requirement already satisfied: zipp>=0.5 in /home/quantinx/.local/lib/python3.9/site-packages (from importlib-metadata>=4.4; python_version < "3.10"->markdown>=2.6.8->tensorboard->-r requirements.txt (line 7)) (3.17.0)
+Requirement already satisfied: oauthlib>=3.0.0 in /home/quantinx/.local/lib/python3.9/site-packages (from requests-oauthlib>=0.7.0->google-auth-oauthlib<2,>=0.5->tensorboard->-r requirements.txt (line 7)) (3.2.2)
+Requirement already satisfied: pyasn1>=0.1.3 in /home/quantinx/.local/lib/python3.9/site-packages (from rsa<5,>=3.1.4->google-auth<3,>=1.6.3->tensorboard->-r requirements.txt (line 7)) (0.5.1)
+Requirement already satisfied: smmap<6,>=3.0.1 in /home/quantinx/.local/lib/python3.9/site-packages (from gitdb<5,>=4.0.1->GitPython!=3.1.29,>=1.0.0->wandb->-r requirements.txt (line 8)) (5.0.1)
+Requirement already satisfied: mdurl~=0.1 in /home/quantinx/.local/lib/python3.9/site-packages (from markdown-it-py>=2.2.0->rich>=11.1.0->tyro>=0.5.11->trl->-r requirements.txt (line 3)) (0.1.2)
+START TIME: Thu Feb  8 12:20:20 EST 2024
+[2024-02-08 12:20:25,672] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+2024-02-08 12:20:26 - WARNING - __main__ - Process rank: 0, device: cuda:0, n_gpu: 1 distributed training: True, 16-bits training: False
+2024-02-08 12:20:26 - INFO - __main__ - Model parameters ModelArguments(base_model_revision=None, model_name_or_path='microsoft/phi-2', cache_dir='/home/quantinx/models/', model_revision='main', model_code_revision=None, torch_dtype='auto', trust_remote_code=False, use_flash_attention_2=False, use_peft=True, lora_r=64, lora_alpha=16, lora_dropout=0.1, lora_target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj'], lora_modules_to_save=None, load_in_8bit=False, load_in_4bit=False, bnb_4bit_quant_type='nf4', use_bnb_nested_quant=False)
+2024-02-08 12:20:26 - INFO - __main__ - Data parameters DataArguments(chat_template=None, dataset_mixer={'HuggingFaceH4/ultrachat_200k': 1.0}, dataset_splits=['train_sft', 'test_sft'], preprocessing_num_workers=12, truncation_side=None)
+2024-02-08 12:20:26 - INFO - __main__ - Training/evaluation parameters SFTConfig(
+_n_gpu=1,
+adafactor=False,
+adam_beta1=0.9,
+adam_beta2=0.999,
+adam_epsilon=1e-08,
+auto_find_batch_size=False,
+bf16=False,
+bf16_full_eval=False,
+data_seed=None,
+dataloader_drop_last=False,
+dataloader_num_workers=0,
+dataloader_persistent_workers=False,
+dataloader_pin_memory=True,
+ddp_backend=None,
+ddp_broadcast_buffers=None,
+ddp_bucket_cap_mb=None,
+ddp_find_unused_parameters=None,
+ddp_timeout=1800,
+debug=[],
+deepspeed=None,
+disable_tqdm=False,
+dispatch_batches=None,
+do_eval=False,
+do_predict=False,
+do_train=False,
+eval_accumulation_steps=None,
+eval_delay=0,
+eval_steps=None,
+evaluation_strategy=no,
+fp16=False,
+fp16_backend=auto,
+fp16_full_eval=False,
+fp16_opt_level=O1,
+fsdp=[],
+fsdp_config={'min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False},
+fsdp_min_num_params=0,
+fsdp_transformer_layer_cls_to_wrap=None,
+full_determinism=False,
+gradient_accumulation_steps=4,
+gradient_checkpointing=True,
+gradient_checkpointing_kwargs={'use_reentrant': False},
+greater_is_better=None,
+group_by_length=False,
+half_precision_backend=auto,
+hub_always_push=False,
+hub_model_id=None,
+hub_private_repo=False,
+hub_strategy=every_save,
+hub_token=<HUB_TOKEN>,
+ignore_data_skip=False,
+include_inputs_for_metrics=False,
+include_num_input_tokens_seen=False,
+include_tokens_per_second=False,
+jit_mode_eval=False,
+label_names=None,
+label_smoothing_factor=0.0,
+learning_rate=2e-05,
+length_column_name=length,
+load_best_model_at_end=False,
+local_rank=0,
+log_level=info,
+log_level_replica=warning,
+log_on_each_node=True,
+logging_dir=data/phi-sft-lora/runs/Feb08_12-20-26_babel-2-12,
+logging_first_step=True,
+logging_nan_inf_filter=True,
+logging_steps=5,
+logging_strategy=steps,
+lr_scheduler_kwargs={},
+lr_scheduler_type=cosine,
+max_grad_norm=1.0,
+max_seq_length=None,
+max_steps=-1,
+metric_for_best_model=None,
+mp_parameters=,
+neftune_noise_alpha=None,
+no_cuda=False,
+num_train_epochs=3,
+optim=adamw_torch,
+optim_args=None,
+output_dir=data/phi-sft-lora,
+overwrite_output_dir=True,
+past_index=-1,
+per_device_eval_batch_size=8,
+per_device_train_batch_size=4,
+prediction_loss_only=False,
+push_to_hub=False,
+push_to_hub_model_id=None,
+push_to_hub_organization=None,
+push_to_hub_token=<PUSH_TO_HUB_TOKEN>,
+ray_scope=last,
+remove_unused_columns=True,
+report_to=['tensorboard'],
+resume_from_checkpoint=None,
+run_name=data/phi-sft-lora,
+save_on_each_node=False,
+save_only_model=False,
+save_safetensors=True,
+save_steps=50,
+save_strategy=steps,
+save_total_limit=None,
+seed=42,
+skip_memory_metrics=True,
+split_batches=False,
+tf32=None,
+torch_compile=False,
+torch_compile_backend=None,
+torch_compile_mode=None,
+torchdynamo=None,
+tpu_metrics_debug=False,
+tpu_num_cores=None,
+use_cpu=False,
+use_ipex=False,
+use_legacy_prediction_loop=False,
+use_mps_device=False,
+warmup_ratio=0.1,
+warmup_steps=0,
+weight_decay=0.0,
+)
+2024-02-08 12:20:26 - INFO - datasets.builder - Using custom data configuration default-74b8cbaeec9bed04
+2024-02-08 12:20:26 - INFO - datasets.info - Loading Dataset Infos from /home/quantinx/.local/lib/python3.9/site-packages/datasets/packaged_modules/json
+2024-02-08 12:20:26 - INFO - datasets.builder - Generating dataset json (/home/quantinx/.cache/huggingface/datasets/json/default-74b8cbaeec9bed04/0.0.0/8bb11242116d547c741b2e8a1f18598ffdd40a1d4f2a2872c7a28b697434bc96)
+2024-02-08 12:20:26 - INFO - datasets.builder - Downloading and preparing dataset json/default to /home/quantinx/.cache/huggingface/datasets/json/default-74b8cbaeec9bed04/0.0.0/8bb11242116d547c741b2e8a1f18598ffdd40a1d4f2a2872c7a28b697434bc96...
+2024-02-08 12:20:26 - INFO - datasets.download.download_manager - Downloading took 0.0 min
+2024-02-08 12:20:26 - INFO - datasets.download.download_manager - Checksum Computation took 0.0 min
+2024-02-08 12:20:26 - INFO - datasets.builder - Generating train split
+2024-02-08 12:20:26 - INFO - datasets.utils.info_utils - Unable to verify splits sizes.
+2024-02-08 12:20:26 - INFO - datasets.builder - Dataset json downloaded and prepared to /home/quantinx/.cache/huggingface/datasets/json/default-74b8cbaeec9bed04/0.0.0/8bb11242116d547c741b2e8a1f18598ffdd40a1d4f2a2872c7a28b697434bc96. Subsequent calls will reuse this data.
+2024-02-08 12:20:26 - INFO - __main__ - *** Load pretrained model ***
+2024-02-08 12:20:26 - INFO - __main__ - *** Model loaded! ***
+{'cache_dir': '/home/quantinx/models/', 'torch_dtype': 'auto', 'use_cache': False, 'device_map': 'auto', 'quantization_config': None}
+[15286, 25]
+2024-02-08 12:20:35 - INFO - datasets.arrow_dataset - Caching processed dataset at /home/quantinx/.cache/huggingface/datasets/json/default-74b8cbaeec9bed04/0.0.0/8bb11242116d547c741b2e8a1f18598ffdd40a1d4f2a2872c7a28b697434bc96/cache-c614921fb1533f35.arrow
+2024-02-08 12:20:36 - WARNING - accelerate.utils.other - Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+2024-02-08 12:20:36 - INFO - __main__ - *** Train ***
+{'loss': 7.2538, 'learning_rate': 4.750593824228029e-08, 'epoch': 0.0}
+{'loss': 0.0, 'learning_rate': 2.3752969121140143e-07, 'epoch': 0.0}
+{'loss': 0.0, 'learning_rate': 4.7505938242280285e-07, 'epoch': 0.01}
+{'loss': 0.0, 'learning_rate': 7.125890736342043e-07, 'epoch': 0.01}
+{'loss': 0.0, 'learning_rate': 9.501187648456057e-07, 'epoch': 0.01}
+{'loss': 0.0, 'learning_rate': 1.187648456057007e-06, 'epoch': 0.02}
+{'loss': 0.0, 'learning_rate': 1.4251781472684086e-06, 'epoch': 0.02}
+{'loss': 0.0, 'learning_rate': 1.6627078384798101e-06, 'epoch': 0.02}
+{'loss': 0.0, 'learning_rate': 1.9002375296912114e-06, 'epoch': 0.03}
+{'loss': 0.0, 'learning_rate': 2.137767220902613e-06, 'epoch': 0.03}
+{'loss': 0.0, 'learning_rate': 2.375296912114014e-06, 'epoch': 0.04}
+{'loss': 0.0, 'learning_rate': 2.612826603325416e-06, 'epoch': 0.04}
+{'loss': 0.0, 'learning_rate': 2.850356294536817e-06, 'epoch': 0.04}
+{'loss': 0.0, 'learning_rate': 3.0878859857482185e-06, 'epoch': 0.05}
+{'loss': 0.0, 'learning_rate': 3.3254156769596202e-06, 'epoch': 0.05}
+{'loss': 0.0, 'learning_rate': 3.562945368171022e-06, 'epoch': 0.05}
+{'loss': 0.0, 'learning_rate': 3.800475059382423e-06, 'epoch': 0.06}
+{'loss': 0.0, 'learning_rate': 4.038004750593825e-06, 'epoch': 0.06}
+{'loss': 0.0, 'learning_rate': 4.275534441805226e-06, 'epoch': 0.06}
+{'loss': 0.0, 'learning_rate': 4.5130641330166275e-06, 'epoch': 0.07}
+{'loss': 0.0, 'learning_rate': 4.750593824228028e-06, 'epoch': 0.07}
+{'loss': 0.0, 'learning_rate': 4.98812351543943e-06, 'epoch': 0.07}
+{'loss': 0.0, 'learning_rate': 5.225653206650832e-06, 'epoch': 0.08}

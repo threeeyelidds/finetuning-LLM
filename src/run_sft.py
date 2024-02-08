@@ -43,7 +43,22 @@ from datasets import load_dataset
 
 logger = logging.getLogger(__name__)
 
-
+system = '''
+our task is to control a cart with a pole on top, aiming to keep the pole balanced. You'll receive observations and decide on actions to maintain balance.
+Observations:
+Cart Position: Where the cart is on the track (0-100).
+Cart Velocity: How fast the cart moves (0-100).
+Pole Angle: The pole's tilt angle (0-100).
+Pole Velocity At Tip: The tip's movement speed (0-100).
+Actions:
+0: Push the cart left.
+1: Push the cart right.
+Objective: Keep the pole balanced by choosing the correct actions based on observations. Success is keeping the pole upright for as long as possible.
+Here are your observations:'''
+system = '''
+Your task is to control a cart with a pole on top, aiming to keep the pole balanced. You'll receive observations and decide on actions to maintain balance.
+Observations:
+'''
 def main():
     parser = H4ArgumentParser((ModelArguments, DataArguments, SFTConfig))
     model_args, data_args, training_args = parser.parse()
@@ -87,13 +102,17 @@ def main():
     def formatting_func(example):
         output_texts = []
         # print(len(example['prompt']))
+        system=""
         for i in range(len(example['prompt'])):
         # text = f"### Question: {example['prompt']}\n ### Answer: {example['completion']}"
-            text = f"### User: {example['prompt'][i]}\n### Assistant: {example['completion'][i].strip()}"
+            text = f"### User: {system}{example['prompt'][i]}\n### Assistant: Action: {example['completion'][i]}"
             output_texts.append(text)
+            if i<i:
+                logger.info(text)
         return output_texts
 
-    train_dataset = load_dataset('json', data_files='/data/andyzou/kedi/harmbench-dev/tqa/data/finetune_truth.json', split='train')
+    train_dataset = load_dataset('json', data_files='/home/quantinx/finetuning-LLM/data/finetune_truth.jsonl', split='train')
+    logger.info("dataset length",len(train_dataset))
     ################
     # Load tokenizer
     ################
@@ -108,25 +127,23 @@ def main():
     )
     quantization_config = get_quantization_config(model_args)
 
-    if "Mixtral" in model_args.model_name_or_path:
+    if model_args.cache_dir:
         model_kwargs = dict(
-        cache_dir = "/data/models",
+        cache_dir = model_args.cache_dir,
         # revision=model_args.model_revision,
         # trust_remote_code=model_args.trust_remote_code,
         # use_flash_attention_2=model_args.use_flash_attention_2,
         torch_dtype=torch_dtype,
         use_cache=False if training_args.gradient_checkpointing else True,
-        device_map=get_kbit_device_map() if quantization_config is not None else None,
+        device_map=get_kbit_device_map() if quantization_config is not None else 'auto',
         quantization_config=quantization_config,
     )
     else:
         model_kwargs = dict(
-        revision=model_args.model_revision,
-        trust_remote_code=model_args.trust_remote_code,
         use_flash_attention_2=model_args.use_flash_attention_2,
         torch_dtype=torch_dtype,
         use_cache=False if training_args.gradient_checkpointing else True,
-        device_map=get_kbit_device_map() if quantization_config is not None else None,
+        device_map=get_kbit_device_map() if quantization_config is not None else 'auto',
         quantization_config=quantization_config,
     )
     logger.info("*** Model loaded! ***")
@@ -152,7 +169,7 @@ def main():
         # dataset_text_field="text",
         max_seq_length=training_args.max_seq_length,
         tokenizer=tokenizer,
-        # packing=True,
+        packing=False,
         peft_config=get_peft_config(model_args),
     )
 
