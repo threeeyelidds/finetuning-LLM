@@ -83,17 +83,31 @@ def main():
     ###############
     # Load datasets
     ###############
+    system = """Control a quadpad robot with 12 DOFs to walk forward by analyzing its state and issuing joint position commands. 
     
+    Input observations:
+            - Angular Velocity: 3D vector (Shape: [1,3]).
+            - IMU Readings: Orientation and acceleration (Shape: [1,2]).
+            - Delta Next Yaw: Predicted yaw change (Shape: [1,1]).
+            - Proprioceptive Positions: Joint poses (Shape: [1,12]).
+            - Proprioceptive Velocities: Joint velocities (Shape: [1,12]).
+            - Action History: Last joint actions (Shape: [1,12]).
+            - Contact Points: Foot-ground contact (-0.5: no contact, 0.5: contact) (Shape: [1,4]).
+
+            Task: Output the next 12 joint positions to advance the robot forward.
+
+            Ensure outputs are formatted as a 12-dimensional vector, guiding the robot's forward movement.
+            """
     def formatting_func(example):
         output_texts = []
         # print(len(example['prompt']))
         for i in range(len(example['prompt'])):
         # text = f"### Question: {example['prompt']}\n ### Answer: {example['completion']}"
-            text = f"### User: {example['prompt'][i]}\n### Assistant: {example['completion'][i].strip()}"
+            text = f"### User: {system} {example['prompt'][i]}\n### Assistant: {example['completion'][i].strip()}"
             output_texts.append(text)
         return output_texts
 
-    train_dataset = load_dataset('json', data_files='/data/andyzou/kedi/harmbench-dev/tqa/data/finetune_truth.json', split='train')
+    train_dataset = load_dataset('json', data_files='/home/quanting/extreme-parkour/legged_gym/logs/observation_actions_log.jsonl', split='train')
     ################
     # Load tokenizer
     ################
@@ -108,27 +122,17 @@ def main():
     )
     quantization_config = get_quantization_config(model_args)
 
-    if "Mixtral" in model_args.model_name_or_path:
-        model_kwargs = dict(
-        cache_dir = "/data/models",
-        # revision=model_args.model_revision,
-        # trust_remote_code=model_args.trust_remote_code,
-        # use_flash_attention_2=model_args.use_flash_attention_2,
-        torch_dtype=torch_dtype,
-        use_cache=False if training_args.gradient_checkpointing else True,
-        device_map=get_kbit_device_map() if quantization_config is not None else None,
-        quantization_config=quantization_config,
+    model_kwargs = dict(
+    cache_dir = "/home/quanting/data",
+    # revision=model_args.model_revision,
+    # trust_remote_code=model_args.trust_remote_code,
+    # use_flash_attention_2=model_args.use_flash_attention_2,
+    torch_dtype=torch_dtype,
+    use_cache=False if training_args.gradient_checkpointing else True,
+    device_map=get_kbit_device_map() if quantization_config is not None else None,
+    quantization_config=quantization_config,
     )
-    else:
-        model_kwargs = dict(
-        revision=model_args.model_revision,
-        trust_remote_code=model_args.trust_remote_code,
-        use_flash_attention_2=model_args.use_flash_attention_2,
-        torch_dtype=torch_dtype,
-        use_cache=False if training_args.gradient_checkpointing else True,
-        device_map=get_kbit_device_map() if quantization_config is not None else None,
-        quantization_config=quantization_config,
-    )
+    
     logger.info("*** Model loaded! ***")
     print(model_kwargs)
 
