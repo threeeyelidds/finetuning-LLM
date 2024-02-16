@@ -31,7 +31,7 @@ def predict(image_path, text):
         use_cache=True)[0]
     return tokenizer.decode(output_ids[input_ids.shape[1]:], skip_special_tokens=True).strip()
 
-@app.route('/get_abstraction', methods=['POST'])
+@app.route('/', methods=['POST'])
 def process_image():
     try:
         # Get the uploaded image from the request
