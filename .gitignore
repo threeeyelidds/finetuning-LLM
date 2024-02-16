@@ -1,1 +1,5 @@
 data/
+checkpoints/
+video/
+images/
+*.mp4
