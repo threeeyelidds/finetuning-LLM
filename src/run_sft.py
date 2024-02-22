@@ -102,7 +102,6 @@ def main():
     def formatting_func(example):
         output_texts = []
         # print(len(example['prompt']))
-        system=""
         for i in range(len(example['prompt'])):
         # text = f"### Question: {example['prompt']}\n ### Answer: {example['completion']}"
             text = f"### User: {system}{example['prompt'][i]}\n### Assistant: Action: {example['completion'][i]}"
@@ -111,8 +110,7 @@ def main():
                 logger.info(text)
         return output_texts
 
-    train_dataset = load_dataset('json', data_files='/home/quantinx/finetuning-LLM/data/finetune_truth.jsonl', split='train')
-    logger.info("dataset length",len(train_dataset))
+    train_dataset = load_dataset('json', data_files='/home/quantinx/finetuning-LLM/data/episode_data_normalized.jsonl', split='train')
     ################
     # Load tokenizer
     ################
@@ -140,6 +138,8 @@ def main():
     )
     else:
         model_kwargs = dict(
+        revision=model_args.model_revision,
+        trust_remote_code=model_args.trust_remote_code,
         use_flash_attention_2=model_args.use_flash_attention_2,
         torch_dtype=torch_dtype,
         use_cache=False if training_args.gradient_checkpointing else True,

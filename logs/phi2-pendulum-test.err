@@ -1,0 +1,21 @@
+/home/quantinx/.local/lib/python3.9/site-packages/torch/cuda/__init__.py:141: UserWarning: CUDA initialization: CUDA driver initialization failed, you might not have a CUDA gpu. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 13.73it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 13.68it/s]
+Traceback (most recent call last):
+  File "/home/quantinx/finetuning-LLM/src/test.py", line 18, in <module>
+    base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf", torch_dtype="auto", device_map='auto',trust_remote_code=True,cache_dir='/home/quantinx/models/').to('cuda:0')
+  File "/home/quantinx/.local/lib/python3.9/site-packages/transformers/modeling_utils.py", line 2595, in to
+    return super().to(*args, **kwargs)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1152, in to
+    return self._apply(convert)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 802, in _apply
+    module._apply(fn)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 825, in _apply
+    param_applied = fn(param)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1150, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/torch/cuda/__init__.py", line 302, in _lazy_init
+    torch._C._cuda_init()
+RuntimeError: CUDA driver initialization failed, you might not have a CUDA gpu.

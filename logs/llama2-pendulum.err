@@ -1,0 +1,17 @@
+/home/quantinx/.local/lib/python3.9/site-packages/torch/cuda/__init__.py:141: UserWarning: CUDA initialization: CUDA driver initialization failed, you might not have a CUDA gpu. (Triggered internally at ../c10/cuda/CUDAFunctions.cpp:108.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/quantinx/finetuning-LLM/src/run_sft.py", line 217, in <module>
+    main()
+  File "/home/quantinx/finetuning-LLM/src/run_sft.py", line 49, in main
+    model_args, data_args, training_args = parser.parse()
+  File "/home/quantinx/finetuning-LLM/src/alignment/configs.py", line 93, in parse
+    output = self.parse_yaml_file(os.path.abspath(sys.argv[1]))
+  File "/home/quantinx/.local/lib/python3.9/site-packages/transformers/hf_argparser.py", line 418, in parse_yaml_file
+    outputs = self.parse_dict(yaml.safe_load(Path(yaml_file).read_text()), allow_extra_keys=allow_extra_keys)
+  File "/home/quantinx/.local/lib/python3.9/site-packages/transformers/hf_argparser.py", line 373, in parse_dict
+    obj = dtype(**inputs)
+  File "<string>", line 122, in __init__
+  File "/home/quantinx/.local/lib/python3.9/site-packages/transformers/training_args.py", line 1489, in __post_init__
+    raise ValueError(
+ValueError: FP16 Mixed precision training with AMP or APEX (`--fp16`) and FP16 half precision evaluation (`--fp16_full_eval`) can only be used on CUDA or NPU devices or certain XPU devices (with IPEX).
