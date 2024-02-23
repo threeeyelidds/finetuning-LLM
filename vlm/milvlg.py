@@ -10,7 +10,7 @@ model = AutoModelForCausalLM.from_pretrained(
     torch_dtype=torch.float16, 
     device_map="auto",
     trust_remote_code=True)
-tokenizer = AutoTokenizer.from_pretrained("MILVLG/imp-v1-3b", trust_remote_code=True,cache_dir='home/quanting/data')
+tokenizer = AutoTokenizer.from_pretrained("MILVLG/imp-v1-3b", trust_remote_code=True,cache_dir='home/quanting/data',load_in_4bit=True)
 
 #Set inputs
 text = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat are the colors of the bus in the image? ASSISTANT:"

@@ -2,7 +2,7 @@ import gym
 from gym import logger as gymlogger
 from gym.wrappers.record_video import RecordVideo
 gymlogger.set_level(40) #error only
-import tensorflow as tf
+# import tensorflow as tf
 import numpy as np
 import random
 import torch
