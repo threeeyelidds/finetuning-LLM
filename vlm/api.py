@@ -38,10 +38,32 @@ app = Flask(__name__)
 #     output = model.generate(**inputs, max_new_tokens=200, do_sample=False)
 #     return processor.decode(output[0][:], skip_special_tokens=True)
 def predict_llm(input_text):
-    input_ids = tokenizer(input_text, return_tensors="pt").to("cuda")
+    input_ids = tokenizer_gemma(input_text, return_tensors="pt").to("cuda")
+    outputs = model_gemma.generate(**input_ids,max_new_tokens=1024)
+    return tokenizer_gemma.decode(outputs[0])
 
-    outputs = model.generate(**input_ids)
-    return tokenizer.decode(outputs[0])
+def predict_llm_chat(chat):
+    templated_text = tokenizer_gemma.apply_chat_template(chat, tokenize=False)
+    input_ids = tokenizer_gemma(templated_text, return_tensors="pt").to("cuda")
+    outputs = model_gemma.generate(**input_ids,max_new_tokens=128)
+    response = tokenizer_gemma.decode(outputs[0])
+    return chat.append({'role':'assistant', 'content':response})
+
+
+@app.route('/llm-chat', methods=['POST'])
+def process_text_chat():
+    try:
+        # Perform reasoning on the image
+        data = request.get_json(force=True)  # 'force=True' is optional, ensures JSON parsing regardless of 
+        default_response = [{"role": "system", "content": "write the solution of two sum"}]
+        # Extract 'chat' list from the JSON data, use default if not found
+        chat = data.get('chat', default_response)
+        new_chat = predict_llm_chat(chat)
+
+        return jsonify({'response': new_chat})
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 @app.route('/llm', methods=['POST'])
 def process_text():
