@@ -3,14 +3,15 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from PIL import Image
 
 torch.set_default_device("cuda")
-
+model_path='/media/quanting/2.0TB/models/MILVLG'
 #Create model
 model = AutoModelForCausalLM.from_pretrained(
-    "MILVLG/imp-v1-3b", 
+    model_path, 
     torch_dtype=torch.float16, 
     device_map="auto",
-    trust_remote_code=True)
-tokenizer = AutoTokenizer.from_pretrained("MILVLG/imp-v1-3b", trust_remote_code=True,cache_dir='home/quanting/data',load_in_4bit=True)
+    trust_remote_code=True,
+    )
+tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True,load_in_4bit=True)
 
 #Set inputs
 text = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: <image>\nWhat are the colors of the bus in the image? ASSISTANT:"

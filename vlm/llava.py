@@ -14,7 +14,6 @@ model = LlavaForConditionalGeneration.from_pretrained(
     torch_dtype=torch.float16, 
     low_cpu_mem_usage=True, 
     use_flash_attention_2=True,
-    cache_dir='home/quanting/data'
 ).to(0)
 
 processor = AutoProcessor.from_pretrained(model_id)

@@ -27,8 +27,8 @@ PROMPT_FORMAT="A chat between a curious user and an artificial intelligence assi
 # ).to(0)
 # processor = AutoProcessor.from_pretrained(model_id)
 # PROMPT_FORMAT = "USER: <image>\n{prompt}\nASSISTANT:"
-tokenizer_llm = AutoTokenizer.from_pretrained("google/gemma-2b-it")
-model_llm = AutoModelForCausalLM.from_pretrained("google/gemma-2b-it", device_map="auto")
+tokenizer_llm = AutoTokenizer.from_pretrained('/media/quanting/2.0TB/models/phi-2')
+model_llm = AutoModelForCausalLM.from_pretrained('/media/quanting/2.0TB/models/phi-2', device_map="auto")
 
 app = Flask(__name__)
 
@@ -40,14 +40,17 @@ app = Flask(__name__)
 def predict_llm(input_text):
     input_ids = tokenizer_llm(input_text, return_tensors="pt").to("cuda")
     outputs = model_llm.generate(**input_ids,max_new_tokens=1024)
-    return tokenizer_llm.decode(outputs[0])
+    input_length = input_ids['input_ids'].size(1)
+    response_only = tokenizer_llm.decode(outputs[0][input_length:], skip_special_tokens=True)
+    return response_only
 
 def predict_llm_chat(chat):
     templated_text = tokenizer_llm.apply_chat_template(chat, tokenize=False)
     input_ids = tokenizer_llm(templated_text, return_tensors="pt").to("cuda")
     outputs = model_llm.generate(**input_ids,max_new_tokens=128)
-    response = tokenizer_llm.decode(outputs[0])
-    return response
+    input_length = input_ids['input_ids'].size(1)
+    response_only = tokenizer_llm.decode(outputs[0][input_length:], skip_special_tokens=True)
+    return response_only
 
 
 @app.route('/llm-chat', methods=['POST'])
