@@ -18,7 +18,7 @@ Observations: '''
 base_model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf", torch_dtype="auto", device_map='auto',trust_remote_code=True,cache_dir='/home/quantinx/models/').to('cuda:0')
 print(base_model.dtype)
 model = PeftModel.from_pretrained(
-        base_model,'/home/quanting/finetuning-LLM/checkpoints/checkpoint').to('cuda:0')
+        base_model,'/home/quantinx/finetuning-LLM/data/llama-7b-sft-lora-text/checkpoint-1700').to('cuda:0')
 tokenizer = AutoTokenizer.from_pretrained("meta-llama/Llama-2-7b-hf", trust_remote_code=True)
 
 
